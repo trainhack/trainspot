@@ -1,4 +1,4 @@
-port = process.env.VMC_APP_PORT || 3000
+port = process.env.APP_PORT || 3000
 host = process.env.APP_HOST || "localhost"
 
 require('zappajs') host, port, ->
@@ -39,7 +39,9 @@ require('zappajs') host, port, ->
       mongoose.connect "mongodb://#{host}/#{manifest.name}-dev"
       @use errorHandler: {dumpExceptions: on, showStack: on}
     production: =>
-      mongoose.connect "mongodb://#{host}/#{manifest.name}"
+      services = JSON.parse process.env.VCAP_SERVICES
+      mongo = services['mongodb-1.8'][0]['credentials']
+      mongoose.connect "mongodb://#{mongo.username}:#{mongo.password}@#{mongo.hostname}:#{mongo.port}/#{mongo.db}"
       @use 'errorHandler'
 
   @get '/': ->
