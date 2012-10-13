@@ -28,7 +28,8 @@
     "url":                    "https://github.com/trainhack/trainspot.git"
   },
   "engines": {
-    "node":                   ">= 0.8.0",
+    "node":                   ">= 0.8.x",
+    "coffee":                 ">=1.3.x",
     "npm":                    "1"
   },
   "dependencies": {
