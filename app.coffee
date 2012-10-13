@@ -1,5 +1,5 @@
 port = process.env.VMC_APP_PORT || 3000
-host = process.env.VCAP_APP_HOST || "localhost"
+host = process.env.APP_HOST || "localhost"
 
 require('zappajs') host, port, ->
   manifest = require './package.json'
@@ -45,6 +45,8 @@ require('zappajs') host, port, ->
   @get '/': ->
     @render 'landing': {passport: @session.passport}
 
+  @get '/env': -> @response.json process.env
+
   # Authenication
   @app.get '/auth/google', passport.authenticate 'google'
   @app.get '/auth/google/return', passport.authenticate 'google', { successRedirect: '/', failureRedirect: '/login' }
@@ -54,4 +56,3 @@ require('zappajs') host, port, ->
 
   @get '/auth/:provider/return': ->
     passport.authenticate @params.provider, { successRedirect: '/', failureRedirect: '/login' }
-  @get '/': -> 'Hello, World!'
