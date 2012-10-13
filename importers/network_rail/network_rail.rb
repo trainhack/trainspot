@@ -7,8 +7,10 @@ require 'active_support/core_ext/date/conversions'
 require 'active_support/core_ext/numeric/time'
 require 'net/http'
 require 'dotenv'
+require 'mongoid'
 
 Dotenv.load
+Mongoid.load!('mongoid.yml', :env => 'development')
 
 # LOAD ALL THE CSVS
 tiplocs = {}
@@ -61,7 +63,7 @@ while true
           if response.code == '200'
             schedule = JSON.parse(response.body)['services'].find{|x| x['trainIdentity'] == train_id.slice(2..5)}
             if schedule
-              puts " -- #{schedule['origin']['departure_time']} #{schedule['origin']['description']} to #{schedule['destination']['description']}"  
+              puts " -- #{schedule['uid']} #{schedule['origin']['departure_time']} #{schedule['origin']['description']} to #{schedule['destination']['description']}"  
             end
           end
           puts
