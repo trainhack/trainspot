@@ -7,7 +7,7 @@ applications:
       info: 
         mem: 64M
         description: Node.js Application
-        exec: 
+        exec: node server.js
     infra: eu-aws
     url: ${name}.${target-base}
     mem: 128M
