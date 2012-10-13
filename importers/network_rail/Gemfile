@@ -1,0 +1,7 @@
+source :rubygems
+
+gem 'stomp'
+gem 'osgb_convert'
+gem 'activesupport'
+
+gem 'dotenv', :groups => [:development, :test]
