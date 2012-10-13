@@ -15,6 +15,8 @@ models = require './models'
         else
           @render 'journeys': { journeys: journeys, passport: @session.passport }
           
+  @get '/checked-in': ->
+    @render 'checked_in': { passport: @session.passport }
 
   @get '/env': -> @response.json process.env
 
