@@ -24,13 +24,16 @@ JourneySchema = new mongoose.Schema
   name: String
   time: Date
   users: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
-  trainID: String
-  location: Array
+  trainId: String
+  location: [Number, Number]
   scheduleId: String
   terminated: Boolean
   route:
     type: mongoose.Schema.ObjectId
     ref: 'Route'
+
+JourneySchema.index
+  location: '2d'
 
 LocationSchema = new mongoose.Schema
   name: String
