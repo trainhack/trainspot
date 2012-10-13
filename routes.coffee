@@ -13,7 +13,8 @@ models = require './models'
         if err
           throw err
         else
-          @response.json journeys
+          @render 'journeys': { journeys: journeys, passport: @session.passport }
+          
 
   @get '/env': -> @response.json process.env
 
