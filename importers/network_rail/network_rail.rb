@@ -8,9 +8,12 @@ require 'active_support/core_ext/numeric/time'
 require 'net/http'
 require 'dotenv'
 require 'mongoid'
+require './journey'
+require 'pry'
+
 
 Dotenv.load
-Mongoid.load!('mongoid.yml', :env => 'development')
+Mongoid.load!('mongoid.yml', :development)
 
 # LOAD ALL THE CSVS
 tiplocs = {}
@@ -46,7 +49,9 @@ while true
     @conn.subscribe @destination, { :ack =>"client" } 
     while true
       @msg = @conn.receive
-      json = JSON.parse(@msg.body)
+        
+        next if @msg.nil?
+      json = JSON.parse(@msg.body) 
       json.each do |message|
         terminated = message['body']['train_terminated'] == 'true'
         train_id = message['body']['train_id']
@@ -54,26 +59,30 @@ while true
         tiploc = tiplocs[stanox]
         station = stations[tiploc]
         if station && ["1","2","9"].include?(train_id[0])
-          puts "train #{train_id} is at #{station[:name]} (#{station[:location].inspect})"
-          if terminated
-            puts ' -- TERMINATED'
-          end
-          # Look up schedule information
+
+          puts "train #{train_id} is at #{station[:name]} (#{station[:location].inspect})"            
+          journey = Journey.find_or_create_by(
+            :trainId    => train_id,
+            :terminated => false
+          )
+          journey.location = [ station[:location].long, station[:location].lat ]
+          journey.terminated = terminated
           response = Net::HTTP.get_response("api.traintimes.im","/locations.json?location=#{tiploc}&date=#{Date.today.iso8601}&startTime=#{5.minutes.ago.strftime('%H%M')}&period=30")
           if response.code == '200'
             schedule = JSON.parse(response.body)['services'].find{|x| x['trainIdentity'] == train_id.slice(2..5)}
             if schedule
+              journey.scheduleId = schedule['uid']
+              journey.name = "#{schedule['origin']['departure_time']} #{schedule['origin']['description']} to #{schedule['destination']['description']}"
               puts " -- #{schedule['uid']} #{schedule['origin']['departure_time']} #{schedule['origin']['description']} to #{schedule['destination']['description']}"  
             end
           end
-          puts
+
+          journey.save
         end
       end
       $stdout.flush
       @conn.ack @msg.headers["message-id"]
     end
     @conn.disconnect
-  rescue
-    sleep 1
   end
 end 

@@ -4,5 +4,5 @@ gem 'stomp'
 gem 'osgb_convert'
 gem 'activesupport'
 gem 'mongoid'
-
+gem 'pry'
 gem 'dotenv', :groups => [:development, :test]
