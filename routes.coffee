@@ -2,7 +2,7 @@ passport = require 'passport'
 models = require './models'
 @include = ->
   @get '/': ->
-    @render 'landing': {passport: @session.passport}
+    @render 'landing': { passport: @session.passport }
 
   @get '/journeys': ->
     lat = @request.query.lat or -2.009
