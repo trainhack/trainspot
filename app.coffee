@@ -1,17 +1,38 @@
 port = process.env.VMC_APP_PORT || 3000
 host = process.env.VCAP_APP_HOST || "localhost"
 
-require('zappajs') port, ->
+require('zappajs') host, port, ->
   manifest = require './package.json'
   mongoose = require 'mongoose'
+  passport = require 'passport'
+  googOID = require('passport-google').Strategy
+
+  models = require('./models')
+  User = models.user
+
+  passport.use new googOID
+    returnURL: "http://#{host}:#{port}/auth/google/return"
+    , realm: "http://#{host}:#{port}"
+    , (identifier, profile, done) ->
+      User.findOrCreate { openId: identifier }, (err, user) ->
+        done err, { user: user, profile: profile }
+
+  passport.serializeUser (auth, done) ->
+    done null, auth
+
+  passport.deserializeUser (auth, done) ->
+    User.findById auth.user._id, (err, user) ->
+      done err, auth
 
   @configure =>
     @use 'cookieParser',
       'bodyParser',
       'methodOverride',
       'session': secret: 'shhhhhhhhhhhhhh!',
+      passport.initialize(),
+      passport.session(),
       @app.router,
-      static: __dirname + '/static',
+      'static'
 
   @configure
     development: =>
@@ -21,4 +42,16 @@ require('zappajs') port, ->
       mongoose.connect "mongodb://#{host}/#{manifest.name}"
       @use 'errorHandler'
 
+  @get '/': ->
+    @render 'landing': {passport: @session.passport}
+
+  # Authenication
+  @app.get '/auth/google', passport.authenticate 'google'
+  @app.get '/auth/google/return', passport.authenticate 'google', { successRedirect: '/', failureRedirect: '/login' }
+
+  @get '/auth/:provider': ->
+    passport.authenticate @params.provider
+
+  @get '/auth/:provider/return': ->
+    passport.authenticate @params.provider, { successRedirect: '/', failureRedirect: '/login' }
   @get '/': -> 'Hello, World!'

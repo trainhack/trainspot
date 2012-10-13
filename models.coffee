@@ -1,10 +1,13 @@
 mongoose = require 'mongoose'
+supergoose = require 'supergoose'
 
 UserSchema = new mongoose.Schema
   name: String
   email: String
   picture: String
   twitterId: String
+
+UserSchema.plugin supergoose
 
 CheckinSchema = new mongoose.Schema
   journey:
