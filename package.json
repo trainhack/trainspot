@@ -1,0 +1,8 @@
+{
+  "name": "trainspot",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "mongoose" : ">= 3.3.1"
+  }
+}
