@@ -15,6 +15,9 @@ html ->
         div class: "container", ->
           partial "shared/navigation"
 
+    div class: "body", ->
+      @body
+
     footer id: "footer", class: "footer", role: "contentinfo", ->
       div class: "container", ->
         partial "shared/footer"
