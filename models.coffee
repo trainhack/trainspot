@@ -21,11 +21,16 @@ CheckinSchema = new mongoose.Schema
     ref: 'Location'
 
 JourneySchema = new mongoose.Schema
+  name: String
   time: Date
+  users: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
+  trainID: String
+  location: Array
+  scheduleId: String
+  terminated: Boolean
   route:
     type: mongoose.Schema.ObjectId
     ref: 'Route'
-  users: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 
 LocationSchema = new mongoose.Schema
   name: String
