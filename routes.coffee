@@ -5,9 +5,13 @@ models = require './models'
   @get '/': ->
     @render 'landing': { passport: @session.passport }
 
+  @post '/set_location': ->
+    @session.location = @body.location or { latitude: 51.518190, longitude: -0.178099 }
+    @response.json @session.location
+
   @get '/journeys': ->
-    lat = @query.lat or -2.009
-    lon = @query.lon or 53.73
+    lat = @query.lat or @session.location.latitude
+    lon = @query.lon or @session.location.longitude
     models.journey.find({ location : { $near : [lat,lon] } })
       .limit(10)
       .exec (err, journeys) =>
