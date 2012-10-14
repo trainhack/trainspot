@@ -1,12 +1,13 @@
 passport = require 'passport'
 models = require './models'
 @include = ->
+
   @get '/': ->
     @render 'landing': { passport: @session.passport }
 
   @get '/journeys': ->
-    lat = @request.query.lat or -2.009
-    lon = @request.query.lon or 53.73
+    lat = @query.lat or -2.009
+    lon = @query.lon or 53.73
     models.journey.find({ location : { $near : [lat,lon] } })
       .limit(10)
       .exec (err, journeys) =>
@@ -17,6 +18,13 @@ models = require './models'
           
   @get '/checked-in': ->
     @render 'checked_in': { passport: @session.passport }
+
+  @get '/checkin/:journey': ->
+    models.journey.findById @params.journey, (err, journey) =>
+      if err
+        throw err
+      else
+        @render 'checkin': {passport: @session.passport, journey: journey}
 
   @get '/env': -> @response.json process.env
 

@@ -3,4 +3,4 @@ div class: "container", ->
     ol class: "nav nav-tabs nav-stacked", ->
       for j in @journeys
         li ->
-          a href: '#', "#{j.name}"
+          a href: "/checkin/#{j._id}", "#{j.name}"
