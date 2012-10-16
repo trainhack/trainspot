@@ -9,5 +9,4 @@ A hack, hurriedly thrown together at offtherails, in London.
 What next
 
 - mebbe link it to foursquare
-- add in geolocation
 - think about how to avoid filling up mongodb too quickly

@@ -10,6 +10,7 @@ models = require './models'
     @response.json @session.location
 
   @get '/journeys': ->
+    # console.log(@session);
     lat = @query.lat or @session.location.latitude
     lon = @query.lon or @session.location.longitude
     models.journey.find({ location : { $near : [lat,lon] } })
@@ -20,15 +21,30 @@ models = require './models'
         else
           @render 'journeys': { journeys: journeys, passport: @session.passport }
           
+  @get '/journeys/:journey': ->
+    models.journey.findById @params.journey, (err, journey) =>
+
+      if err
+        throw err
+      else
+        # console.log journey
+        @render 'checkin': {passport: @session.passport, journey: journey}
+
   @get '/checked-in': ->
     @render 'checked_in': { passport: @session.passport }
 
-  @get '/checkin/:journey': ->
+  @post '/checkins': ->
+
+    console.log @params
     models.journey.findById @params.journey, (err, journey) =>
       if err
         throw err
       else
-        @render 'checkin': {passport: @session.passport, journey: journey}
+        console.log "params:"
+        console.log @params
+        console.log "journey"
+        console.log journey
+        @render 'checked_in': {passport: @session.passport, journey: journey}
 
   @get '/env': -> @response.json process.env
 
