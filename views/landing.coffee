@@ -7,9 +7,7 @@ div class: "container", ->
         $.post '/set_location',
           location: position.coords,
           (data) ->
-            console.log data
-            $('a.btn').before "<div class='alert alert-success'><p>Look! Your latitude is #{data.latitude}, and your longitude is #{data.longitude}!</p><p>How handy is that?</p></div>"
-
+            done
 
     if @passport.user
       a class: "btn btn-large btn-primary", href: '/journeys' , "Show nearby trains"
