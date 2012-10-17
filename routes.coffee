@@ -10,7 +10,6 @@ models = require './models'
     @response.json @session.location
 
   @get '/journeys': ->
-    # console.log(@session);
     lat = @query.lat or @session.location.latitude
     lon = @query.lon or @session.location.longitude
     models.journey.find({ location : { $near : [lat,lon] } })
@@ -34,21 +33,17 @@ models = require './models'
     @render 'checked_in': { passport: @session.passport }
 
   @post '/checkins': ->
-
-    console.log @params
-    models.journey.findById @params.journey, (err, journey) =>
+    models.journey.findById @body.journey, (err, journey) =>
+      
+      # check if user in the array, and add him if not, using addToSet
       if err
         throw err
       else
-        console.log "params:"
-        console.log @params
-        console.log "journey"
-        console.log journey
         @render 'checked_in': {passport: @session.passport, journey: journey}
 
   @get '/env': -> @response.json process.env
 
-  # Authenication
+  # Authentication
   @app.get '/auth/google', passport.authenticate 'google'
   @app.get '/auth/google/return', passport.authenticate 'google', { successRedirect: '/', failureRedirect: '/login' }
 
