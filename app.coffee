@@ -11,12 +11,12 @@ require('zappajs') host, port, ->
   User = models.user
 
   passport.use new googOID
-    returnURL: "http://#{host}:#{port}/auth/google/return"
-    , realm: "http://#{host}:#{port}"
-    , (identifier, profile, done) ->
+    returnURL: "http://#{host}:#{port}/auth/google/return", 
+    realm: "http://#{host}:#{port}",
+    (identifier, profile, done) ->
       User.findOrCreate { email: profile.emails[0].value }, (err, user) ->
-        User.update { _id: user._id}, { name: "#{profile.displayName}" }, (err, u) ->
-          done
+        user.name = profile.displayName
+        user.save()
         done err, { user: user, profile: profile }
 
   passport.serializeUser (auth, done) ->
