@@ -8,5 +8,6 @@ A hack, hurriedly thrown together at offtherails, in London.
 
 What next
 
+- add users to journeys upon checkin
 - mebbe link it to foursquare
 - think about how to avoid filling up mongodb too quickly

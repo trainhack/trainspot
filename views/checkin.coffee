@@ -6,4 +6,5 @@ div class: "hero-unit", ->
     input type: "hidden", name: "journey", value: "#{@journey.id}"
     button class: "btn btn-large btn-primary", type: "submit",  "Yes, check me in"
     a href: "/journeys", ->
-      small class: "cancel", "No, take me back"
+      p ->
+        small class: "cancel", "No, take me back"

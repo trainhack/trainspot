@@ -5,6 +5,7 @@ div class: "container", ->
     h3 "Here, have a badge, yo."
 
     h4 "(insert badge here)"
-    
-    h4 @journey
+
+      
+    # h4 "#{@journey}"
     
