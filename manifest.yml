@@ -1,7 +1,7 @@
 --- 
 applications: 
-  .: 
-    name: trainspot
+  webapp: 
+    name: trainspot-webapp
     framework: 
       name: node
       info: 
@@ -10,7 +10,24 @@ applications:
         exec: node server.js
     infra: eu-aws
     url: ${name}.${target-base}
-    mem: 128M
+    mem: 256M
+    instances: 1
+    services: 
+      trainspot-mongodb: 
+        type: mongodb
+  importers/network_rail: 
+    name: trainsport-network-importer
+    framework: 
+      name: standalone
+      info: 
+        mem: 64M
+        description: Standalone Application
+        exec: 
+    runtime: ruby193
+    command: ruby network_rail.rb
+    infra: eu-aws
+    url: 
+    mem: 256M
     instances: 1
     services: 
       trainspot-mongodb: 

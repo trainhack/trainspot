@@ -1,0 +1,37 @@
+train 121P51MQ13 is at Huddersfield Rail Station (#<OsgbConvert::WGS84:0x007fd8738cf390 @lat=53.648483472553224, @long=-1.784690296439952, @height=50.0281589217484>)
+ -- 1515 Newcastle to Manchester Airport
+
+train 181A67MQ13 is at Retford Rail Station (#<OsgbConvert::WGS84:0x007fd87481d338 @lat=53.315136209033604, @long=-0.947884421550225, @height=48.819273902103305>)
+
+train 171A37MQ13 is at Potters Bar Rail Station (#<OsgbConvert::WGS84:0x007fd8749235e8 @lat=51.69705524896784, @long=-0.1926059483650032, @height=46.41676413267851>)
+
+train 152N45MT13 is at Seaham Rail Station (#<OsgbConvert::WGS84:0x007fd873598a50 @lat=54.83903304962823, @long=-1.3463374514887898, @height=50.07373748347163>)
+ -- 1632 Middlesbrough to Carlisle
+
+train 211B83MO13 is at Gatley Rail Station (#<OsgbConvert::WGS84:0x007fd873679078 @lat=53.39288660411589, @long=-2.2312338743798565, @height=50.37786478549242>)
+ -- 1426 Cleethorpes to Manchester Airport
+
+train 211B83MO13 is at East Didsbury Rail Station (#<OsgbConvert::WGS84:0x007fd8737aafa0 @lat=53.409290272596046, @long=-2.2219962256032346, @height=50.37796041369438>)
+ -- 1426 Cleethorpes to Manchester Airport
+
+train 222P79MS13 is at Swinton (South Yorks) Rail Station (#<OsgbConvert::WGS84:0x007fd87483bc70 @lat=53.48622160933604, @long=-1.3058215546855676, @height=49.366770003922284>)
+ -- 1619 Scunthorpe to Lincoln Central
+
+train 182F26MU13 is at Pontefract Monkhill Rail Station (#<OsgbConvert::WGS84:0x007fd874836f18 @lat=53.6989653692248, @long=-1.3036902520452172, @height=49.49579966906458>)
+ -- 1715 Knottingley to Leeds
+
+train 181A67MQ13 is at Retford Rail Station (#<OsgbConvert::WGS84:0x007fd87481d338 @lat=53.315136209033604, @long=-0.947884421550225, @height=48.819273902103305>)
+
+train 121V96MQ13 is at Sheffield Rail Station (#<OsgbConvert::WGS84:0x007fd8748ad9d8 @lat=53.3782019332678, @long=-1.4621110651468412, @height=49.48205431178212>)
+ -- 1507 Newcastle to Reading
+
+train 151P53MR13 is at Cross Gates Rail Station (#<OsgbConvert::WGS84:0x007fd874876078 @lat=53.804894324139774, @long=-1.4515805902131251, @height=49.73180405702442>)
+
+train 172V49MU13 is at Guiseley Rail Station (#<OsgbConvert::WGS84:0x007fd873737ca8 @lat=53.875914698372256, @long=-1.715080039597778, @height=50.07714329753071>)
+ -- 1710 Ilkley to Leeds
+
+train 191J31MS13 is at Gilberdyke Rail Station (#<OsgbConvert::WGS84:0x007fd8735413e0 @lat=53.74794434443057, @long=-0.7322439420102123, @height=48.83343366999179>)
+ -- 1609 Bridlington to Sheffield
+
+train 172M48MU13 is at New Pudsey Rail Station (#<OsgbConvert::WGS84:0x007fd873750e10 @lat=53.804464534993706, @long=-1.6807924536653416, @height=49.99827944859862>)
+ -- 1707 Leeds to Manchester Victoria

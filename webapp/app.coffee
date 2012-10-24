@@ -17,7 +17,6 @@ require('zappajs') host, port, ->
       User.findOrCreate { email: profile.emails[0].value }, (err, user) ->
         user.name = profile.displayName
         user.save()
-
         done err, { user: user, profile: profile }
 
   passport.serializeUser (auth, done) ->

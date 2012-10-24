@@ -1,0 +1,17 @@
+--- 
+applications: 
+  .: 
+    name: trainspot
+    framework: 
+      name: node
+      info: 
+        mem: 64M
+        description: Node.js Application
+        exec: node server.js
+    infra: eu-aws
+    url: ${name}.${target-base}
+    mem: 128M
+    instances: 1
+    services: 
+      trainspot-mongodb: 
+        type: mongodb
