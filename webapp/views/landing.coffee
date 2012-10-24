@@ -14,4 +14,7 @@ div class: "container", ->
     else
       h1 "What if trains were on Foursquare?"
 
-      a class: "btn btn-large btn-primary", href: '/auth/google' , "Sign in with Google"
+      p ->
+        a class: "btn btn-large btn-primary", href: '/auth/foursquare' , "Sign in with Foursquare"
+      p ->
+        a class: "btn btn-large btn-primary", href: '/auth/google' , "Sign in with Google"

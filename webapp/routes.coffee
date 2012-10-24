@@ -47,6 +47,9 @@ models = require './models'
   @app.get '/auth/google', passport.authenticate 'google'
   @app.get '/auth/google/return', passport.authenticate 'google', { successRedirect: '/', failureRedirect: '/login' }
 
+  @app.get '/auth/foursquare', passport.authenticate 'foursquare'
+  @app.get '/auth/foursquare/callback', passport.authenticate('foursquare', { successRedirect: '/', failureRedirect: '/login' })
+
   @get '/auth/:provider': ->
     passport.authenticate @params.provider
 

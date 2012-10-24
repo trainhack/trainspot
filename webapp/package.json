@@ -38,6 +38,7 @@
     "supergoose":             ">= 0.0.8",
     "passport":               ">= 0.1.12",
     "passport-google":        ">= 0.2.0",
-    "coffee-script":                  "1.3.3"
+    "coffee-script":          "1.3.3",
+    "passport-foursquare":     ">= 0.1.2"
   }
 }

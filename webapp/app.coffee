@@ -6,15 +6,20 @@ require('zappajs') host, port, ->
   mongoose = require 'mongoose'
   passport = require 'passport'
   googOID = require('passport-google').Strategy
-
+  FoursquareStrategy = require('passport-foursquare').Strategy
   models = require('./models')
   User = models.user
 
-  passport.use new googOID
-    returnURL: "http://#{host}:#{port}/auth/google/return", 
-    realm: "http://#{host}:#{port}",
-    (identifier, profile, done) ->
-      User.findOrCreate { email: profile.emails[0].value }, (err, user) ->
+
+
+
+  passport.use new FoursquareStrategy
+    clientID: "JTN2AKQEWVSBM24JGMBMOXK30OUPJSE4HM1DWXVJEVWBROEZ",
+    clientSecret: "4OPJFTIJQVWIFJPKB3ZIZID4RIJ0CFRMK0CMXPJCAYVR4S4S",
+    callbackURL: "http://localhost:3000/auth/foursquare/callback",
+    (accessToken, refreshToken, profile, done) ->
+      console.log(profile)
+      User.findOrCreate { foursquareId: profile.id }, (err, user) ->
         user.name = profile.displayName
         user.save()
         done err, { user: user, profile: profile }
