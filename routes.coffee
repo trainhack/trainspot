@@ -10,6 +10,8 @@ models = require './models'
     @response.json @session.location
 
   @get '/journeys': ->
+    if not @session.location
+      @session.location = { latitude: 51.518190, longitude: -0.178099 }
     lat = @query.lat or @session.location.latitude
     lon = @query.lon or @session.location.longitude
     models.journey.find({ location : { $near : [lat,lon] } })
