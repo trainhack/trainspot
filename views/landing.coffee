@@ -11,8 +11,6 @@ div class: "container", ->
         $ ->
         navigator.geolocation.getCurrentPosition (position) ->
           console.log position
-          $.post '/set_location',
-            location: position.coords,
-            (data) ->
-              console.log data
-              $('a.btn').before "<div class='alert alert-success'><p>Look! Your latitude is #{data.latitude}, and your longitude is #{data.longitude}!</p><p>How handy is that?</p></div>"
+          $.post '/set_location', location: position.coords, (data) ->
+            console.log data
+            $('a.btn').before "<div class='alert alert-success'><p>Look! Your latitude is #{data.latitude}, and your longitude is #{data.longitude}!</p><p>How handy is that?</p></div>"
